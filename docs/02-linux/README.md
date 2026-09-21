@@ -78,3 +78,5 @@ Linux es el cimiento de nuestra arquitectura. Si el sistema operativo base falla
 - [ ] Entiendo la diferencia entre un usuario normal y `root`.
 - [ ] Sé cómo iniciar, detener y revisar el estado de un servicio con `systemctl`.
 - [ ] Entiendo cómo leer logs básicos para buscar errores.
+
+➡️ **[Ir al Módulo 03 - Redes](../03-redes/README.md)**
