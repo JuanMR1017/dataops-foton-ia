@@ -1,0 +1,8 @@
+# Fragmento a añadir/ajustar en /etc/redis/redis.conf en VM1 (MASTER)
+# Ver documentación: docs/07-bases-datos/redis.md
+
+bind 0.0.0.0                 # AJUSTAR en producción a IPs específicas del clúster
+protected-mode yes
+requirepass CAMBIAR_ESTA_CLAVE
+masterauth CAMBIAR_ESTA_CLAVE   # misma clave que requirepass, la usará VM2 para autenticarse
+appendonly yes                  # persistencia AOF, recomendada junto con RDB

@@ -1,0 +1,4 @@
+# Fragmento a añadir en /etc/postgresql/16/main/pg_hba.conf en VM1 (PRIMARY)
+# Permite que VM2 se conecte como usuario de replicación.
+# TYPE  DATABASE        USER            ADDRESS                 METHOD
+host    replication     repl_user       192.168.1.20/32         scram-sha-256   # AJUSTAR: IP real de VM2

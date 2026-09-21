@@ -1,0 +1,9 @@
+# Fragmento a añadir/ajustar en /etc/redis/redis.conf en VM2 (REPLICA)
+# Ver documentación: docs/07-bases-datos/redis.md
+
+bind 0.0.0.0
+protected-mode yes
+requirepass CAMBIAR_ESTA_CLAVE      # misma clave que en VM1
+masterauth CAMBIAR_ESTA_CLAVE       # clave para autenticarse contra el master (VM1)
+replicaof 192.168.1.10 6379         # AJUSTAR: IP real de VM1
+appendonly yes

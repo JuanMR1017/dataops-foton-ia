@@ -1,0 +1,9 @@
+# Fragmento a añadir/ajustar en /etc/postgresql/16/main/postgresql.conf en VM1 (PRIMARY)
+# Ver documentación: docs/07-bases-datos/postgresql.md
+
+listen_addresses = '*'              # AJUSTAR en producción a las IPs específicas del clúster
+wal_level = replica                 # nivel mínimo de WAL necesario para streaming replication
+max_wal_senders = 5                 # cuántos standbys pueden conectarse a la vez (VM2 + margen)
+wal_keep_size = 512MB               # WAL retenido para no perder sincronía si VM2 se desconecta brevemente
+hot_standby = on                    # permite lecturas en el standby (VM2)
+synchronous_commit = on             # ajustar a 'remote_apply' si se requiere replicación síncrona estricta

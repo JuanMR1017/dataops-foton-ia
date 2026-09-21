@@ -1,0 +1,32 @@
+# Configuración de Prometheus - VM3
+# Ver documentación: docs/09-observabilidad/prometheus.md
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: "node_exporter"
+    static_configs:
+      - targets:
+          - "192.168.1.10:9100"   # VM1 - AJUSTAR IPs reales
+          - "192.168.1.20:9100"   # VM2
+          - "192.168.1.30:9100"   # VM3
+
+  - job_name: "postgres_exporter"
+    static_configs:
+      - targets:
+          - "192.168.1.10:9187"   # VM1 (primary)
+          - "192.168.1.20:9187"   # VM2 (standby)
+
+  - job_name: "redis_exporter"
+    static_configs:
+      - targets:
+          - "192.168.1.10:9121"   # VM1
+          - "192.168.1.20:9121"   # VM2
+
+  - job_name: "patroni"
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - "192.168.1.10:8008"
+          - "192.168.1.20:8008"

@@ -1,0 +1,39 @@
+# Stack de ChirpStack para VM1 - punto de partida educativo, AJUSTAR credenciales y versiones
+# antes de usar en un entorno real. Ver documentación: docs/06-protocolos-iot/lorawan-chirpstack.md
+version: "3.8"
+
+services:
+  chirpstack:
+    image: chirpstack/chirpstack:4
+    restart: unless-stopped
+    command: -c /etc/chirpstack
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./chirpstack.toml:/etc/chirpstack/chirpstack.toml
+    depends_on:
+      - postgres
+      - redis
+      - mosquitto
+
+  chirpstack-gateway-bridge:
+    image: chirpstack/chirpstack-gateway-bridge:4
+    restart: unless-stopped
+    ports:
+      - "1700:1700/udp"
+    volumes:
+      - ./chirpstack-gateway-bridge.toml:/etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml
+    depends_on:
+      - mosquitto
+
+  mosquitto:
+    image: eclipse-mosquitto:2
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+
+# postgres y redis en este stack NO se usan si ya están instalados nativamente en el host
+# como base de datos principal del clúster (recomendado para HA real, ver Módulo 07).
+# Se incluyen aquí solo como referencia si se decide containerizarlos también.
